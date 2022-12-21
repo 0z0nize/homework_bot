@@ -7,7 +7,6 @@ from http import HTTPStatus
 import pytest
 import requests
 import telegram
-
 import utils
 
 
