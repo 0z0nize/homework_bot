@@ -29,10 +29,12 @@ r"""
                  `""
 
 """
+
 import exceptions
 import logging
 import os
 import requests
+import sys
 import telegram
 import time
 from dotenv import load_dotenv
@@ -72,6 +74,7 @@ def check_tokens():
 def send_message(bot, message):
     """Отправляет сообщение в Telegram чат."""
     try:
+        logging.info(f'Начало отправки сообщения: {message} в Telegram.')
         bot.send_message(
             chat_id=TELEGRAM_CHAT_ID,
             text=f'<b><i>{message}</i></b>',
@@ -85,7 +88,7 @@ def send_message(bot, message):
             f'Ошибка отправки сообщения: {error}'
         )
     else:
-        logging.debug(f'Успешная отправка сообщения {message}')
+        logging.debug(f'Успешная отправка сообщения: "{message}"')
 
 
 def get_api_answer(timestamp):
@@ -95,17 +98,21 @@ def get_api_answer(timestamp):
     В случае успешного запроса должна вернуть ответ API,
     приведя его из формата JSON к типам данных Python.
     """
+    api_dict = {
+        'url': ENDPOINT,
+        'headers': HEADERS,
+        'params': {'from_date': timestamp}
+    }
     try:
-        homework_statuses = requests.get(
-            ENDPOINT,
-            headers=HEADERS,
-            params={'from_date': timestamp}
-        )
+        logging.info(f"Начало запроса к эндпоинту : {api_dict['url']}")
+        homework_statuses = requests.get(**api_dict)
+        if homework_statuses.status_code != HTTPStatus.OK:
+            raise exceptions.ApiRequestError(
+                f"Ошибка соединения с эндпоинтом: {api_dict['url']}"
+            )
+        return homework_statuses.json()
     except requests.RequestException as error:
         raise exceptions.RequestError(f'Ошибка запроса: {error}')
-    if homework_statuses.status_code != HTTPStatus.OK:
-        raise exceptions.ApiRequestError('Ошибка соединения с эндпоинтом')
-    return homework_statuses.json()
 
 
 def check_response(response):
@@ -152,13 +159,13 @@ def main():
     """
     if not check_tokens():
         logging.critical('Отсутсвуют переменные окружения')
-        raise SystemExit('Бот так не будет работать, нужны '
-                         'переменные окружения.')
+        sys.exit('Бот так не будет работать, нужны переменные окружения.')
 
     bot = telegram.Bot(token=TELEGRAM_TOKEN)
     timestamp = int(time.time()) - HW_TIME_DEPTH
 
     status = ''
+    error_msg = ''
 
     while True:
         try:
@@ -171,8 +178,10 @@ def main():
                 text = parse_status(response['homeworks'][0])
                 send_message(bot, text)
         except Exception as error:
-            message = f'Сбой в работе программы: {error}'
-            send_message(bot, message)
+            if error_msg != error:
+                error_msg = error
+                message = f'Сбой в работе программы: {error_msg}'
+                send_message(bot, message)
         finally:
             time.sleep(RETRY_PERIOD)
 

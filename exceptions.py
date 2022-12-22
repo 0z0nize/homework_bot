@@ -2,7 +2,7 @@
 class SendMessageError(Exception):
     pass
 
-class RequestError(Exception):
+class ApiRequestError(Exception):
     pass
 
 class ApiResponseTypeError(Exception):
