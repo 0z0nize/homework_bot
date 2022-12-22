@@ -1,4 +1,5 @@
 """Файл с исключениями."""
+
 class SendMessageError(Exception):
     pass
 
