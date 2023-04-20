@@ -1,5 +1,5 @@
 ### Telegram-bot
-![Telegram_logo svg](https://user-images.githubusercontent.com/112638163/233298829-221077e0-3344-4c8c-ac29-6954928ec34c.png)
+![telegram](https://user-images.githubusercontent.com/112638163/233349089-f827646b-0b4a-42b7-a421-2b1fe47d1bd8.png)
 
 ```
 Телеграм-бот для отслеживания статуса проверки домашней работы на Яндекс.Практикум.
