@@ -1,4 +1,5 @@
-![telegram](https://user-images.githubusercontent.com/112638163/233349089-f827646b-0b4a-42b7-a421-2b1fe47d1bd8.png)
+![233348780-313ad8af-8fa5-47e0-8f1c-7f0aea8c24a4](https://user-images.githubusercontent.com/112638163/234624491-9fedf430-8f37-406f-a68f-d8f079de3d7d.png)
+
 ### Telegram-bot
 ```
 Телеграм-бот для отслеживания статуса проверки домашней работы на Яндекс.Практикум.
