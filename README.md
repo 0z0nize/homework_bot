@@ -1,4 +1,5 @@
 ![233348780-313ad8af-8fa5-47e0-x8cvfd1c-7f0aea8c24a122](https://user-images.githubusercontent.com/112638163/234632117-c09cbbb2-0453-4f23-b49a-480af6e9d3b5.png)
+![telegram_bot](https://user-images.githubusercontent.com/112638163/236455183-c7f9d6df-26fc-449e-84a9-9a8378e021d4.png)
 
 ### Описание
 
