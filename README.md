@@ -12,7 +12,7 @@ Telegram-бот, который будет обращается к API серв�
 ### Технологии:
 ![python version](https://img.shields.io/badge/Python-3.9.10-green?logo=python)
 ![Python version](https://img.shields.io/badge/dotenv-0.19.0-green?logo=dotenv)
-![Python version](https://img.shields.io/badge/telegram bot-13.7-green?logo=telegram)
+![Python version](https://img.shields.io/badge/telegram_bot-13.7-green?logo=telegram)
 
 ### Как запустить проект:
 
